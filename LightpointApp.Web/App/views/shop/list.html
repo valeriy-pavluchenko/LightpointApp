@@ -1,0 +1,32 @@
+﻿<h2>List</h2>
+<div ng-controller="shopController">
+    <h4>Shop</h4>
+    <hr />
+    <loading-indicator ng-show="loading"></loading-indicator>
+    <div class="panel" ng-show="!loading">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Address</td>
+                    <td>OperatingMode</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="shop in shops">
+                    <td>{{ shop.Name }}</td>
+                    <td>{{ shop.Address }}</td>
+                    <td>{{ shop.OperatingMode }}</td>
+                    <td><a href="#/product/shop/{{shop.Id}}">Products</a></td>
+                    <td>
+                        <a href="#/shop/details/{{ shop.Id }}">Details</a> |
+                        <a href="#/shop/edit/{{ shop.Id }}">Edit</a> |
+                        <a href="#/shop/remove/{{ shop.Id }}">Remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
