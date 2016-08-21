@@ -15,30 +15,23 @@ namespace LightpointApp.Web.Controllers
 {
     public class ShopController : ApiController
     {
-        private IShopProvider _shopProvider;
+        private ILightpointUnitOfWork _unitOfWork;
 
-        public ShopController(IShopProvider shopProvider)
+        public ShopController(ILightpointUnitOfWork unitOfWork)
         {
-            _shopProvider = shopProvider;
+            _unitOfWork = unitOfWork;
         }
-
-        private static List<ShopModel> Shops = new List<ShopModel>
-        {
-            new ShopModel { Id = 1, Name = "Shop1", Address = "Address1", OperatingMode = "OperatingMode1" },
-            new ShopModel { Id = 2, Name = "Shop2", Address = "Address2", OperatingMode = "OperatingMode2" },
-            new ShopModel { Id = 3, Name = "Shop3", Address = "Address3", OperatingMode = "OperatingMode3" },
-        };
 
         public IEnumerable<ShopModel> Get()
         {
-            var shops = _shopProvider.GetAll();
+            var shops = _unitOfWork.Shops.Get();
 
             return ShopMapper.ToViewModel(shops);
         }
 
         public ShopModel Get(int id)
         {
-            var shop = _shopProvider.GetById(id);
+            var shop = _unitOfWork.Shops.GetById(id);
 
             return ShopMapper.ToViewModel(shop);
         }
@@ -46,18 +39,25 @@ namespace LightpointApp.Web.Controllers
         [ValidateModel]
         public void Post(ShopModel shop)
         {
-            _shopProvider.Create(ShopMapper.ToDataModel(shop));
+            var shopDataModel = ShopMapper.ToDataModel(shop);
+
+            _unitOfWork.Shops.Insert(shopDataModel);
+            _unitOfWork.Save();
         }
 
         [ValidateModel]
         public void Put(ShopModel shop)
         {
-            _shopProvider.Edit(ShopMapper.ToDataModel(shop));
+            var shopDataModel = ShopMapper.ToDataModel(shop);
+
+            _unitOfWork.Shops.Update(shopDataModel);
+            _unitOfWork.Save();
         }
 
         public void Delete(int id)
         {
-            _shopProvider.Remove(id);
+            _unitOfWork.Shops.Delete(id);
+            _unitOfWork.Save();
         }
     }
 }

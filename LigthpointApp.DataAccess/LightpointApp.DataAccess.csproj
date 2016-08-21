@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\LightpointContext.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Shop.cs" />
     <Compile Include="Initializers\DropCreateSeedDatabaseAlways.cs" />

@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace LightpointApp.BusinessLogic.Interfaces
 {
-    public interface IShopProvider
+    public interface ILightpointUnitOfWork
     {
-        IEnumerable<Shop> GetAll();
-        Shop GetById(int id);
-        void Create(Shop shop);
-        void Edit(Shop shop);
-        void Remove(int id);
+        IRepository<Shop> Shops { get; }
+        IRepository<Product> Products { get; }
+
+        void Save();
     }
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace LightpointApp.DataAccess.Entities
 {
-    public class Shop
+    public class Shop : BaseEntity
     {
         public Shop()
         {
             Products = new List<Product>();
         }
         
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string OperatingMode { get; set; }

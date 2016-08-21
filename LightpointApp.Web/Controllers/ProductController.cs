@@ -14,40 +14,23 @@ namespace LightpointApp.Web.Controllers
 {
     public class ProductController : ApiController
     {
-        private IProductProvider _productProvider;
+        private ILightpointUnitOfWork _unitOfWork;
 
-        public ProductController(IProductProvider productProvider)
+        public ProductController(ILightpointUnitOfWork unitOfWork)
         {
-            _productProvider = productProvider;
+            _unitOfWork = unitOfWork;
         }
-
-        private static List<ShopModel> Shops = new List<ShopModel>
-        {
-            new ShopModel { Id = 1, Name = "Shop1", Address = "Address1", OperatingMode = "OperatingMode1" },
-            new ShopModel { Id = 2, Name = "Shop2", Address = "Address2", OperatingMode = "OperatingMode2" },
-            new ShopModel { Id = 3, Name = "Shop3", Address = "Address3", OperatingMode = "OperatingMode3" },
-        };
-
-        private static List<ProductModel> Products = new List<ProductModel>
-        {
-            new ProductModel { Id = 1, Name = "Product1", Description = "Description1", ShopId = 1 },
-            new ProductModel { Id = 2, Name = "Product2", Description = "Description2", ShopId = 1 },
-            new ProductModel { Id = 3, Name = "Product3", Description = "Description3", ShopId = 1 },
-            new ProductModel { Id = 4, Name = "Product4", Description = "Description4", ShopId = 2 },
-            new ProductModel { Id = 5, Name = "Product5", Description = "Description5", ShopId = 2 },
-            new ProductModel { Id = 6, Name = "Product6", Description = "Description6", ShopId = 3 },
-        };
 
         public IEnumerable<ProductModel> Get()
         {
-            var products = _productProvider.GetAll();
+            var products = _unitOfWork.Products.Get();
 
             return ProductMapper.ToViewModel(products);
         }
 
         public ProductModel Get(int id)
         {
-            var product = _productProvider.GetById(id);
+            var product = _unitOfWork.Products.GetById(id);
 
             return ProductMapper.ToViewModel(product);
         }
@@ -55,7 +38,7 @@ namespace LightpointApp.Web.Controllers
         [Route("api/product/shop/{id}")]
         public IEnumerable<ProductModel> GetByShopId(int id)
         {
-            var products = _productProvider.GetByShopId(id);
+            var products = _unitOfWork.Products.Get(p => p.ShopId == id);
 
             return ProductMapper.ToViewModel(products);
         }
@@ -63,18 +46,25 @@ namespace LightpointApp.Web.Controllers
         [ValidateModel]
         public void Post(ProductModel product)
         {
-            _productProvider.Create(ProductMapper.ToDataModel(product));
+            var productDataModel = ProductMapper.ToDataModel(product);
+
+            _unitOfWork.Products.Insert(productDataModel);
+            _unitOfWork.Save();
         }
 
         [ValidateModel]
         public void Put(ProductModel product)
         {
-            _productProvider.Edit(ProductMapper.ToDataModel(product));
+            var productDataModel = ProductMapper.ToDataModel(product);
+
+            _unitOfWork.Products.Update(productDataModel);
+            _unitOfWork.Save();
         }
 
         public void Delete(int id)
         {
-            _productProvider.Remove(id);
+            _unitOfWork.Products.Delete(id);
+            _unitOfWork.Save();
         }
     }
 }

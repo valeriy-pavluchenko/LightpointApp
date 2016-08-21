@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace LightpointApp.DataAccess.Entities
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

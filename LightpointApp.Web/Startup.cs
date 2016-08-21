@@ -14,9 +14,11 @@ using Ninject.Web.WebApi.OwinHost;
 using LightpointApp.DataAccess.Contexts;
 using System.Configuration;
 using LightpointApp.BusinessLogic.Interfaces;
-using LightpointApp.BusinessLogic.Providers;
+using LightpointApp.BusinessLogic.Repositories;
 using System.Data.Entity;
 using LightpointApp.DataAccess.Initializers;
+using LightpointApp.DataAccess.Entities;
+using LightpointApp.BusinessLogic.UnitOfWork;
 
 [assembly: OwinStartup(typeof(LightpointApp.Web.Startup))]
 
@@ -58,13 +60,17 @@ namespace LightpointApp.Web
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
+            CreateBindings(kernel);
+
+            return kernel;
+        }
+
+        private static void CreateBindings(IKernel kernel)
+        {
             var connectionString = ConfigurationManager.ConnectionStrings["LightpointDatabase"].ConnectionString;
 
             kernel.Bind<LightpointContext>().ToSelf().InTransientScope().WithConstructorArgument("connectionString", connectionString);
-            kernel.Bind<IShopProvider>().To<ShopProvider>().InTransientScope();
-            kernel.Bind<IProductProvider>().To<ProductProvider>().InTransientScope();
-
-            return kernel;
+            kernel.Bind<ILightpointUnitOfWork>().To<LightpointUnitOfWork>().InTransientScope();
         }
     }
 }

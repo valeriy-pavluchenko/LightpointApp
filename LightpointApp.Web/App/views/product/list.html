@@ -9,18 +9,12 @@
                 <tr>
                     <td>Name</td>
                     <td>Description</td>
-                    <td></td>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="product in products">
                     <td>{{ product.Name }}</td>
                     <td>{{ product.Description }}</td>
-                    <td>
-                        <a href="#/product/details/{{ product.Id }}">Details</a> |
-                        <a href="#/product/edit/{{ product.Id }}">Edit</a> |
-                        <a href="#/product/remove/{{ product.Id }}">Remove</a>
-                    </td>
                 </tr>
             </tbody>
         </table>
