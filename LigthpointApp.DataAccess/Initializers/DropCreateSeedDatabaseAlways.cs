@@ -24,9 +24,9 @@ namespace LightpointApp.DataAccess.Initializers
             {
                 context.Shops.Add(new Shop
                 {
-                    Name = "Shop" + i.ToString(),
-                    Address = "Address" + i.ToString(),
-                    OperatingMode = "OperatingMode" + i.ToString()
+                    Name = $"Shop{i}",
+                    Address = $"Address{i}",
+                    OperatingMode = $"OperatingMode{i}"
                 });
             }
 
@@ -46,7 +46,7 @@ namespace LightpointApp.DataAccess.Initializers
                     context.Products.Add(new Product
                     {
                         Name = $"Product{count}",
-                        Description = $"Address{count}",
+                        Description = $"Description{count}",
                         ShopId = i
                     });
                 }
