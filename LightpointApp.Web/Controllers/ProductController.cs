@@ -23,14 +23,16 @@ namespace LightpointApp.Web.Controllers
 
         public IEnumerable<ProductModel> Get()
         {
-            var products = _unitOfWork.Products.Get();
+            var products = _unitOfWork.Products.Get(null, null, "Shop");
 
             return ProductMapper.ToViewModel(products);
         }
 
         public ProductModel Get(int id)
         {
-            var product = _unitOfWork.Products.GetById(id);
+            var product = _unitOfWork.Products
+                .Get(p => p.Id == id, null, "Shop")
+                .Single();
 
             return ProductMapper.ToViewModel(product);
         }
@@ -38,7 +40,7 @@ namespace LightpointApp.Web.Controllers
         [Route("api/product/shop/{id}")]
         public IEnumerable<ProductModel> GetByShopId(int id)
         {
-            var products = _unitOfWork.Products.Get(p => p.ShopId == id);
+            var products = _unitOfWork.Products.Get(p => p.ShopId == id, null, "Shop");
 
             return ProductMapper.ToViewModel(products);
         }

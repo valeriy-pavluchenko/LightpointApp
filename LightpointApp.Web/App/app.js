@@ -1,1 +1,1 @@
-﻿angular.module('lightpointApp', ['ngRoute']);
+﻿angular.module('lightpointApp', ['ngRoute', 'ngMessages']);

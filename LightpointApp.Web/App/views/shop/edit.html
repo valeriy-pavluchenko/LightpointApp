@@ -1,0 +1,49 @@
+﻿<h2>Edit</h2>
+<div>
+    <h4>Shop</h4>
+    <hr />
+    <loading-indicator ng-show="loading"></loading-indicator>
+    <div class="form-horizontal" ng-show="!loading">
+        <form role="form" name="shopForm" ng-submit="edit()" novalidate>
+            <div class="form-group">
+                <label class="control-label col-md-2">Name</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="shopName" ng-model="shop.Name" placeholder="Name"
+                           ng-required="true" ng-minlength="5" ng-maxlength="15" />
+                    <div class="field-validation-valid text-danger" ng-messages="shopForm.$submitted && shopForm.shopName.$error">
+                        <div ng-message="required">The Name field is required.</div>
+                        <div ng-message="minlength">The Name field is too short.</div>
+                        <div ng-message="maxlength">The Name is too long.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Address</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="shopAddress" ng-model="shop.Address" placeholder="Address"
+                           ng-required="true" />
+                    <div class="field-validation-valid text-danger" ng-messages="shopForm.$submitted && shopForm.shopAddress.$error">
+                        <div ng-message="required">The Address field is required.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">OperatingMode</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="shopOperatingMode" ng-model="shop.OperatingMode" placeholder="OperatingMode" 
+                           ng-required="true" ng-pattern="/^[0-2][0-3]:[0-5][0-9]\s-\s[0-2][0-3]:[0-5][0-9]$/"/>
+                    <div class="field-validation-valid text-danger" ng-messages="shopForm.$submitted && shopForm.shopOperatingMode.$error">
+                        <div ng-message="required">The OperatingMode field is required.</div>
+                        <div ng-message="pattern">Enter operation mode in xx:xx - xx:xx format.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-3">
+                    <button type="submit" class="btn btn-default">Save</button>
+                    <a class="btn btn-default" href="#/shops">Back to list</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

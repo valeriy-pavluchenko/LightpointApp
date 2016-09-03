@@ -16,7 +16,8 @@ namespace LightpointApp.Web.Mappers
                 Id = item.Id,
                 Name = item.Name,
                 Description = item.Description,
-                ShopId = item.ShopId
+                ShopId = item.ShopId,
+                ShopName = item.Shop.Name
             };
         }
 

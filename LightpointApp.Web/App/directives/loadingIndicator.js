@@ -8,10 +8,6 @@
     loadingIndicator.$inject = ['$window'];
     
     function loadingIndicator($window) {
-        // Usage:
-        //     <loadingIndicatorDirective></loadingIndicatorDirective>
-        // Creates:
-        // 
         var directive = {
             link: link,
             restrict: 'E',

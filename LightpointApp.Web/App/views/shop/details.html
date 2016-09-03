@@ -1,0 +1,22 @@
+﻿<h2>Details</h2>
+<div>
+    <h4>Shop</h4>
+    <hr>
+    <loading-indicator ng-show="loading"></loading-indicator>
+    <dl class="dl-horizontal" ng-show="!loading">
+        <dt>Id</dt>
+        <dd ng-bind="shop.Id"></dd>
+
+        <dt>Name</dt>
+        <dd ng-bind="shop.Name"></dd>
+
+        <dt>Address</dt>
+        <dd ng-bind="shop.Address"></dd>
+
+        <dt>OperatingMode</dt>
+        <dd ng-bind="shop.OperatingMode"></dd>
+    </dl>
+</div>
+
+<a class="btn btn-default" href="#/product/shop/{{shop.Id}}">Products</a>
+<a class="btn btn-default" href="#/shops">Back to list</a>

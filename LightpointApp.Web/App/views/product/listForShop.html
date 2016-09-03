@@ -1,0 +1,33 @@
+﻿<h2>List</h2>
+<div>
+    <h4>Products in <b>{{ shop.Name }}</b></h4>
+    <hr />
+    <loading-indicator ng-show="loading"></loading-indicator>
+    <div ng-show="!loading">
+        <p ng-show="products.length == 0">There are no products added yet.</p>
+        <div class="panel" ng-show="products.length > 0">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in products">
+                        <td>{{ product.Name }}</td>
+                        <td>{{ product.Description }}</td>
+                        <td>
+                            <a href="#/product/details/{{ product.Id }}">Details</a> |
+                            <a href="#/product/edit/{{ product.Id }}">Edit</a> |
+                            <a href="#/product/shop/{{ shop.Id }}" ng-click="remove(product.Id)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-default" href="#/shop/details/{{ shop.Id }}">Shop details</a>
+        <a class="btn btn-default" href="#/shops">Back to shop list</a>
+    </div>
+</div>

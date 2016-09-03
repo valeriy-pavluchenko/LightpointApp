@@ -1,0 +1,49 @@
+﻿<h2>Edit</h2>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <loading-indicator ng-show="loading"></loading-indicator>
+    <div class="form-horizontal" ng-show="!loading">
+        <form role="form" name="productForm" ng-submit="edit()" novalidate>
+            <div class="form-group">
+                <label class="control-label col-md-2">Name</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="productName" ng-model="product.Name" placeholder="Name"
+                           ng-required="true" ng-minlength="5" ng-maxlength="15" />
+                    <div class="field-validation-valid text-danger" ng-messages="productForm.$submitted && productForm.productName.$error">
+                        <div ng-message="required">The Name field is required.</div>
+                        <div ng-message="minlength">The Name field is too short.</div>
+                        <div ng-message="maxlength">The Name is too long.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Shop</label>
+                <div class="col-md-3">
+                    <select class="form-control" name="productShopId" ng-model="product.ShopId" ng-selected="product.ShopId" ng-options="shop.Id as shop.Name for shop in shops"
+                            ng-required="true"></select>
+                    <div class="field-validation-valid text-danger" ng-messages="productForm.$submitted && productForm.productShopId.$error">
+                        <div ng-message="required">The shop must be chosen.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Description</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="productDescription" ng-model="product.Description" placeholder="Description"
+                           ng-required="true" ng-minlength="5" />
+                    <div class="field-validation-valid text-danger" ng-messages="productForm.$submitted && productForm.productDescription.$error">
+                        <div ng-message="required">The Description field is required.</div>
+                        <div ng-message="minlength">The Description is too short.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-3">
+                    <button type="submit" class="btn btn-default">Save</button>
+                    <a class="btn btn-default" href="#/products">Back to list</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

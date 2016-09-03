@@ -1,0 +1,22 @@
+﻿<h2>Details</h2>
+<div>
+    <h4>Product</h4>
+    <hr>
+    <loading-indicator ng-show="loading"></loading-indicator>
+    <div ng-show="!loading">
+        <dl class="dl-horizontal">
+            <dt>Id</dt>
+            <dd ng-bind="product.Id"></dd>
+
+            <dt>Name</dt>
+            <dd ng-bind="product.Name"></dd>
+
+            <dt>Description</dt>
+            <dd ng-bind="product.Description"></dd>
+
+            <dt>Shop</dt>
+            <dd ng-bind="product.ShopName"></dd>
+        </dl>
+        <a class="btn btn-default" href="#/products">Back to list</a>
+    </div>
+</div>
